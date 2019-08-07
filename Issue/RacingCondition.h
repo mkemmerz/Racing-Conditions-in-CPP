@@ -11,6 +11,8 @@
  * Racing conditions may appear because the threads are not synchronized nor using a mutex.
  */
 
+#include <string>
+
 class RacingCondition
 {
 public:
@@ -22,7 +24,7 @@ public:
     /**
      * Creates a racing condition.
      */
-    void execute();
+    virtual void execute(const std::string& preMessage);
 
 private:
     /**
@@ -35,7 +37,14 @@ private:
      *
      * @param amount The amount of increments
      */
-    void incrementCounter(int amount);
+    virtual void incrementCounter(const int amount);
+
+    /**
+     * Getter for the counter of the class.
+     *
+     * @return The current counter in a specific state.
+     */
+    virtual int getCounter();
 
     /**
      * Executes the scenario mentioned in the class description.
@@ -45,6 +54,19 @@ private:
      */
     int startIncMultithreaded();
 
+    /**
+     * Reset the counter to its initial value so it can be used
+     * for a fresh try.
+     */
+    virtual void resetCounter();
+
+    /**
+     * Prints a message to the console for the current test case.
+     */
+    void printPreExecutionMessage(const std::string& message);
+
+    static constexpr int amountOfIterations = 10000;   /* Tries to provoke a racing condition */
+    static constexpr int expectedValueForCounter = 5000; /* The expected outcome for our counter after the execution */
 };
 
 #endif //UNTITLED_RACINGCONDITION_H
