@@ -27,10 +27,6 @@ public:
     virtual void execute(const std::string& preMessage);
 
 private:
-    /**
-     * The counter of this class, multiple threads are working on it.
-     */
-    int counter = 0;
 
     /**
      * Simple increment method. Increments the static variable of this class amount-times.
@@ -67,6 +63,13 @@ private:
 
     static constexpr int amountOfIterations = 10000;   /* Tries to provoke a racing condition */
     static constexpr int expectedValueForCounter = 5000; /* The expected outcome for our counter after the execution */
+
+protected:
+    /**
+     * The counter of this class, multiple threads are working on it.
+     */
+    int counter = 0;
+
 };
 
 #endif //UNTITLED_RACINGCONDITION_H
