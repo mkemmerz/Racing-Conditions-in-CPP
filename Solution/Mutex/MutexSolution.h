@@ -9,6 +9,11 @@
 
 #include "../../Issue/RacingCondition.h"
 
+/**
+ * MutexSolution increments a counter using 5 threads.
+ *
+ * Racing Conditions are voided by the use of a mutex.
+ */
 class MutexSolution : public RacingCondition
 {
 
